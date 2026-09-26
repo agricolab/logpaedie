@@ -1,0 +1,20 @@
+<svg viewBox="0 0 72 72" xmlns="http://www.w3.org/2000/svg" stroke="#000" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><g transform="translate(35 32) scale(0.82) translate(-36 -36)">
+  <defs>
+    <pattern id="mesh" width="4" height="4" patternUnits="userSpaceOnUse">
+      <path d="M0 0 L4 4 M4 0 L0 4" stroke="#6A6A6A" stroke-width="0.8"/>
+    </pattern>
+    <clipPath id="bowl"><path d="M8 28 A20 20 0 0 0 48 28 Z"/></clipPath>
+  </defs>
+  <path d="M8 28 A20 20 0 0 0 48 28 Z" fill="#E4E4E4" stroke="none"/>
+  <rect x="6" y="26" width="44" height="30" fill="url(#mesh)" clip-path="url(#bowl)" stroke="none"/>
+  <path d="M8 28 A20 20 0 0 0 48 28" fill="none"/>
+  <path d="M47 27 L66 18 Q69 17 70 20 Q70 22 68 23 L49 31" fill="#9B9B9A"/>
+  <circle cx="66.5" cy="20" r="1.2" fill="#fff"/>
+  <path d="M5 26 H51 V30 H5 Z" fill="#9B9B9A"/>
+  <path d="M4 28 Q2 28 2 26 Q2 24 5 25" fill="none"/>
+  <g fill="#92D3F5" stroke-width="1.2">
+    <path d="M20 52 Q24 58 22.5 60.5 Q20 62 18 60 Q17 57 20 52 Z"/>
+    <path d="M33 56 Q37 62 35.5 64.5 Q33 66 31 64 Q30 61 33 56 Z"/>
+    <path d="M26 62 Q30 68 28.5 70.5 Q26 72 24 70 Q23 67 26 62 Z"/>
+  </g>
+</g></svg>
