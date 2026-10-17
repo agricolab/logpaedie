@@ -2,32 +2,38 @@
 import re, os, base64
 from icons import ROOT, FONT_CSS, icon
 
-TITLE = 's oder z? Reimpaare'
+TITLE = 'z oder s? Reimpaare'
 S_COL, Z_COL = '#1e88e5', '#d84315'
 SECTIONS = [
-    ('s und z am Wortanfang', [
+    ('z und s am Wortanfang', [
         ('{s}auberer [Z]auberer', '1F9FC', '1F9D9'),
-        ('{S}ocken [z]ocken', '1F9E6', '1F3AE'),
-        ('{s}elten [z]elten', '1F48E', '26FA'),
+        ('[z]ocken – {S}ocken', '1F3AE', '1F9E6'),
+        ('[Z]ecke – {S}äcke', 'Zecke', 'Sack*2'),
         ('[Z]iegen {s}iegen', '1F410', '1F3C6'),
         ('[Z]ehen {s}ehen', '1F9B6', '1F440'),
         ('[z]ehn {S}een', '1F51F', '1F3DE'),
-        ('{S}itz-[Z]itze', '1F4BA', '1F404'),
-        ('{S}ack – [z]ack!', 'Sack', '26A1'),
+        ('[Z]itze – {S}itze', 'Zitze', '1F4BA*2'),
+        ('[Z]ack – in den {S}ack!', '26A1', 'Sack'),
+        ('[Z]ahn – {S}ahne', '1F9B7', '1F366'),
+        ('[Z]aun – {S}au', '1F6A7', '1F437'),
     ]),
-    ('s und z in der Wortmitte oder am Ende', [
-        ('kra{ss}e Ka[tz]e', '1F60E', '1F431'),
-        ('na{ss}e Ta[tz]e', '1F4A7', '1F43E'),
-        ('bla{ss}e Gla[tz]e', '1F636', '1F468-200D-1F9B2'),
-        ('Pup{s}-Pu[tz]', '1F4A8', '1F9FD'),
-        ('Ro[tz]-Ro{ss}', '1F927', '1F40E'),
-        ('Pil[z]-Pil{s}', '1F344', '1F37A'),
-        ('gan[z]e Gan{s}', '1F4AF', '1FABF'),
-        ('Schwei{ß}-Schwei[z]', '1F4A6', '1F1E8-1F1ED'),
+    ('z und s in der Wortmitte oder am Ende', [
+        ('na{ss}e Ka[tz]e', '1F4A7', '1F431'),
+        ('Ta[tz]e – Ka{ss}e', '1F43E', '1F4B0'),
+        ('Gla[tz]e – Ta{ss}e', '1F468-200D-1F9B2', '2615'),
+        ('Pu[tz] – Pup{s}', '1F9FD', '1F4A8'),
+        ('Ro[tz] – Ro{ss}', '1F927', '1F40E'),
+        ('Pil[z] – Pil{s}', '1F344', '1F37A'),
+        ('Tan[z] – Gan{s}', '1F483', '1FABF'),
+        ('Schwei[z] – Schwei{ß}', '1F1E8-1F1ED', '1F4A6'),
+        ('Klo[tz] – Bo{ss}', '1FAB5', '1F935'),
+        ('Spa[tz] – Spa{ß}', '1F426', '1F923'),
     ]),
 ]
 
 def om(code):
+    if code.endswith('*2'):
+        return f'<div class="two">{om(code[:-2]) * 2}</div>'
     if not os.path.exists(f'openmoji/{code}.svg'):
         return icon(code)
     b = base64.b64encode(open(f'openmoji/{code}.svg', 'rb').read()).decode()
@@ -37,7 +43,7 @@ def label(t):
     t = re.sub(r'\{([^}]+)\}', r'<b class="s">\1</b>', t)
     return re.sub(r'\[([^\]]+)\]', r'<b class="z">\1</b>', t)
 
-KEY = f'<div class="key"><b class="s">s</b> wie Sonne &nbsp;·&nbsp; <b class="z">z</b> wie Zahn</div>'
+KEY = f'<div class="key"><b class="z">z</b> wie Zahn &nbsp;·&nbsp; <b class="s">s</b> wie Sonne</div>'
 FOOT = '<div class="foot">Symbole: OpenMoji (openmoji.org, CC BY-SA 4.0)</div>'
 body = ''
 for head, pairs in SECTIONS:
@@ -59,9 +65,11 @@ h1{{font-size:40px;font-weight:700;text-align:center;line-height:1.1}}
 h2{{font-size:24px;font-weight:700;border-bottom:2px dashed #d6d1c4;margin:4mm 0 4mm}}
 .grid{{flex:1;display:grid;grid-template-columns:1fr 1fr;align-content:space-evenly;gap:3mm 6mm}}
 .card{{display:grid;grid-template-columns:auto auto;justify-content:center;gap:1mm 3mm}}
-.circ{{flex:none;width:34mm;height:34mm;border-radius:50%;border:1.5px solid #bdbdbd;background:#fff;overflow:hidden}}
+.circ{{flex:none;width:30mm;height:30mm;border-radius:50%;border:1.5px solid #bdbdbd;background:#fff;overflow:hidden}}
 .circ img{{width:100%;height:100%}}
 .circ svg{{width:92%;height:92%}}
+.two{{display:flex;align-items:center;justify-content:center;width:100%;height:100%}}
+.circ .two>img,.circ .two>svg{{width:64%;height:64%;margin:0 -9%}}
 .lbl{{grid-column:1 / 3;text-align:center;font-size:24px;font-weight:700;line-height:1.15}}
 b.s{{color:{S_COL}}} b.z{{color:{Z_COL}}}
 .foot{{font-size:7.5px;color:#9a968c;text-align:right;font-family:sans-serif}}
